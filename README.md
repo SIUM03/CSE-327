@@ -1,2 +1,1 @@
-# CSE-327 - Bankeee - A Secure Bank Management Solution
- Addssh -T git@github.com
+# CSE-327 - Bankeee - A Secure Bank Management Soluti
