@@ -1,0 +1,198 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: url("/Photos/Signup_Page_background.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* this contains the mobile logo and form */
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.corner {
+  display: flex;
+  align-items: center;
+  margin: 20px 20px 0 20px;
+}
+
+
+
+
+.mobile_logo img {
+  width: 800px;
+  height: 700px;
+  margin-top: 50px;
+  margin-left: -250px;
+}
+
+#signup_form {
+  width: 400px;
+  background: linear-gradient(135deg, #a7cec8, #1daa5f);
+  border: 3px solid rgba(17, 128, 2, 0.25);
+  border-radius: 30px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  padding: 20px;
+  margin-bottom: 60px;
+}
+
+.form_header {
+  font-size: 36px;
+  font-weight: 700;
+  color: white;
+  padding-top: 35px;
+}
+
+.subtitle {
+  color: white;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: start;
+  margin-left: 20px;
+  margin-top: -5px;
+  margin-bottom: 10px;
+}
+
+input {
+  width: 80%;
+  font-size: 18px;
+  color: rgb(11, 92, 1);
+  border: 2px solid transparent;
+  background: transparent;
+  padding-left: 25px;
+  padding-bottom: 5px;
+  margin: 5px;
+  border-bottom: 3px solid rgb(248, 255, 247);
+  transition: border-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+input::placeholder {
+  color: rgb(250, 227, 227);
+}
+
+input:hover {
+  color: black;
+}
+
+input:focus,
+textarea:focus,
+select:focus,
+button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.full_name,
+.email,
+.password,
+.confirm_password {
+  margin: 0 auto;
+  padding: 12px;
+}
+
+button {
+  font-size: 22px;
+  font-weight: 600;
+  color: white;
+  width: 85%;
+  padding: 10px;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  background-color: rgba(1, 126, 0.5);
+  margin-top: 5px;
+  margin-bottom: 10px;
+  transition: border-color 0.2s ease-in-out, color 0.3s ease-in-out;
+}
+
+button.signup_submit:hover {
+  background-color: rgba(1, 126, 1);
+  border: 2px solid rgb(238, 238, 238);
+  cursor: pointer;
+}
+
+.down_subtitile {
+  font-size: 14px;
+  color: white;
+  margin-top: 5px;
+}
+
+a {
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Styling the select dropdown */
+.type {
+  width: 80%;
+  margin: 10px auto;
+  position: relative;
+}
+
+/* Styling the select box */
+.type select {
+  width: 100%;
+  padding: 12px 25px;
+  font-size: 18px;
+  color: #ffffff;
+  background-color: transparent;
+  border: 2px solid transparent;
+  border-bottom: 3px solid rgb(248, 255, 247);
+  transition: border-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.type select:focus {
+  outline: none;
+  border-color: #1daa5f;
+  box-shadow: 0 0 8px rgba(13, 192, 24, 0.6);
+}
+
+.type select option {
+  font-size: 16px;
+  padding: 8px 12px;
+  background-color: #fff;
+  color: #333;
+}
+
+.type select option:hover {
+  background-color: #a7cec8;
+  color: #1b1b1b;
+}
+
+.type select::-ms-expand {
+  display: none;
+}
+
+.type select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url('https://image.shutterstock.com/image-vector/black-arrow-down-icon-illustration-260nw-1481458572.jpg');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 40px;
+}
+
+.type i {
+  color: #000000;
+}
