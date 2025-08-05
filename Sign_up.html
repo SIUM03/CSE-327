@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Account</title>
+
+    <!-- Font Awesome Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- icon link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- CSS Link -->
+    <link rel="stylesheet" href="/CSS/signup.css">
+</head>
+
+<body>
+
+
+
+
+    <form id="signup_form">
+        <div class="form_header">Create New Account</div>
+
+
+        <div class="full_name">
+            <input type="text" id="name" placeholder="Full Name" required>
+        </div>
+
+        <div class="email">
+            <input type="email" id="email" placeholder="Email Address" required>
+        </div>
+        <div class="phone_number">
+            <input type="phone" id="phone" placeholder="Phone number" required>
+        </div>
+        <br>
+        <div class="address">
+            <input type="textarea" id="textarea" placeholder="Current Address" required>
+        </div>
+
+        <div class="password">
+            <input type="password" id="password" placeholder="Password" required>
+        </div>
+
+        <div class="confirm_password">
+            <input type="password" id="confirm_password" placeholder="Confirm Password" required>
+        </div>
+        <!-- Add the type select dropdown -->
+        <div class="type">
+            <select id="type" name="type" required>
+                <option value="">Select Type</option>
+                <option value="Savings">Savings</option>
+                <option value="Current">Current</option>
+            </select>
+        </div>
+
+        <div class="deposit_amount ">
+            <input type="number" id="number" placeholder="Amount" required>
+        </div>
+
+
+
+        <button type="submit" class="signup_submit">Sign Up</button>
+
+        <div class="down_subtitile">Already have an account? <a href="/html/Login_page.html">Log In</a></div>
+    </form>
+
+
+    </div>
+
+</body>
+
+</html>
