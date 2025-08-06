@@ -2,77 +2,70 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create New Account</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Page</title>
 
-    <!-- Font Awesome Link -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- css link -->
+  <link rel="stylesheet" href="login_css.css">
 
-    <!-- icon link -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- icon link -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <!-- CSS Link -->
-    <link rel="stylesheet" href="/signup.css">
+  <!-- font link -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Noto+Serif+Bengali:wght@100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
 </head>
 
 <body>
 
+  <div class="welcome-text">
+    <h1>Welcome<br> <span class="admin">Log in to start banking </span></h1>
+  </div>
+
+
+  <div class="container">
+    <h2 class="login-title">Customer Login</h2>
+    <p class="subtitle">Sign in to continue</p>
+
+
+    <form id="loginForm">
+      <div class="input-box">
+        <i class="fa-regular fa-envelope" id="main"></i>
+        <input type="email" id="loginEmail" placeholder="Email" required>
+      </div>
+
+      <div class="input-box">
+        <i class="fa-solid fa-lock" id="main"></i>
+        <input type="password" id="loginPassword" placeholder="Password" required>
+      </div>
+      <!-- Add the status select dropdown -->
+      <div class="input-box">
+        <i class="fa-solid fa-user-shield"></i> <!-- use appropriate icon -->
+        <select name="status" required>
+          <option value="">Select Status</option>
+          <option value="customer">Customer</option>
+          <option value="employee">Employee</option>
+          <option value="admin">Admin</option>
+        </select>
+      </div>
+
+
+      <div class="options">
+        <label><input type="checkbox"> Remember for 30 days</label>
+        <a href="forget_password.html" class="forgot-password">Forgot Password?</a>
+      </div>
+      <button type="submit" class="login-btn">Log In</button>
 
 
 
-    <form id="signup_form">
-        <div class="form_header">Create New Account</div>
-
-
-        <div class="full_name">
-            <input type="text" id="name" placeholder="Full Name" required>
-        </div>
-
-        <div class="email">
-            <input type="email" id="email" placeholder="Email Address" required>
-        </div>
-        <div class="phone_number">
-            <input type="phone" id="phone" placeholder="Phone number" required>
-        </div>
-        <br>
-        <div class="address">
-            <input type="textarea" id="textarea" placeholder="Current Address" required>
-        </div>
-
-        <div class="password">
-            <input type="password" id="password" placeholder="Password" required>
-        </div>
-
-        <div class="confirm_password">
-            <input type="password" id="confirm_password" placeholder="Confirm Password" required>
-        </div>
-        <!-- Add the type select dropdown -->
-        <div class="type">
-            <select id="type" name="type" required>
-                <option value="">Select Type</option>
-                <option value="Savings">Savings</option>
-                <option value="Current">Current</option>
-            </select>
-        </div>
-
-        <div class="deposit_amount ">
-            <input type="number" id="number" placeholder="Amount" required>
-        </div>
-
-
-
-        <button type="submit" class="signup_submit">Sign Up</button>
-
-        <div class="down_subtitile">Already have an account? <a href="/Login_page.html">Log In</a></div>
-    </form>
-
-
-    </div>
+      <div class="signup-text">
+        <p>Don't have an account? <a href="Sign_up.html" class="signup-link" target="_main"> Sign up</a></p>
+      </div>
+  </div>
 
 </body>
 
