@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 03, 2025 at 08:25 PM
+-- Generation Time: Aug 07, 2025 at 05:46 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -46,23 +46,6 @@ INSERT INTO `Account` (`accountId`, `type`, `status`, `Balance`, `customerId`) V
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Admin`
---
-
-CREATE TABLE `Admin` (
-  `adminId` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `Admin`
---
-
-INSERT INTO `Admin` (`adminId`) VALUES
-(202);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `Customer`
 --
 
@@ -93,6 +76,7 @@ INSERT INTO `Customer` (`customerId`, `name`, `nid`, `phone`, `email`, `address`
 CREATE TABLE `Employee` (
   `employeeId` bigint(20) NOT NULL,
   `name` varchar(100) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
   `role` enum('Admin','Employee') DEFAULT NULL,
   `username` varchar(50) DEFAULT NULL,
   `password` varchar(100) DEFAULT NULL
@@ -102,9 +86,9 @@ CREATE TABLE `Employee` (
 -- Dumping data for table `Employee`
 --
 
-INSERT INTO `Employee` (`employeeId`, `name`, `role`, `username`, `password`) VALUES
-(201, 'Shila Akter', 'Employee', 'shila_emp', 'pass123'),
-(202, 'Tamim Islam', 'Admin', 'tamim_admin', 'admin456');
+INSERT INTO `Employee` (`employeeId`, `name`, `email`, `role`, `username`, `password`) VALUES
+(201, 'Shila Akter', 'shila004@gmail.com', 'Employee', 'shila_emp', 'pass123'),
+(202, 'Tamim Islam', 'tamim003@gmail.com', 'Admin', 'tamim_admin', 'admin456');
 
 -- --------------------------------------------------------
 
@@ -183,12 +167,6 @@ ALTER TABLE `Account`
   ADD KEY `customerId` (`customerId`);
 
 --
--- Indexes for table `Admin`
---
-ALTER TABLE `Admin`
-  ADD PRIMARY KEY (`adminId`);
-
---
 -- Indexes for table `Customer`
 --
 ALTER TABLE `Customer`
@@ -232,12 +210,6 @@ ALTER TABLE `Transactions`
 --
 ALTER TABLE `Account`
   ADD CONSTRAINT `account_ibfk_1` FOREIGN KEY (`customerId`) REFERENCES `Customer` (`customerId`);
-
---
--- Constraints for table `Admin`
---
-ALTER TABLE `Admin`
-  ADD CONSTRAINT `admin_ibfk_1` FOREIGN KEY (`adminId`) REFERENCES `Employee` (`employeeId`);
 
 --
 -- Constraints for table `KYCVerification`
