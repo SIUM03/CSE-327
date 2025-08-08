@@ -17,12 +17,15 @@ if ($conn->connect_error) {
 $accountSql = "SELECT accountId FROM Account WHERE customerId = $customerId";
 $accountResult = $conn->query($accountSql);
 
+
+
 if ($accountResult->num_rows === 0) {
     echo '<p>No account found for this customer.</p>';
     exit();
 }
 
 $accountId = $accountResult->fetch_assoc()['accountId'];
+
 
 // Fetch transactions
 $transactionSql = "
@@ -166,8 +169,22 @@ $transactionResult = $conn->query($transactionSql);
                         <tr>
                             <td><?= htmlspecialchars($row['transactionId']) ?></td>
                             <td><?= htmlspecialchars(ucfirst($row['type'])) ?></td>
-                            <td><?= htmlspecialchars($row['sender_accountId'] ?? 'N/A') ?></td>
-                            <td><?= htmlspecialchars($row['receiver_accountId'] ?? 'N/A') ?></td>
+                        <?php
+                        $senderAccountId = $row['sender_accountId'];
+                            
+                                $senderNameSql = "SELECT name FROM Customer WHERE customerId = (SELECT customerId FROM Account WHERE accountId = $senderAccountId)";
+                                $senderNameResult = $conn->query($senderNameSql);
+                                $senderName = ($senderNameResult && $senderNameResult->num_rows > 0) ? $senderNameResult->fetch_assoc()['name'] : 'N/A';
+                            
+                        ?>
+                        <td><?= htmlspecialchars($senderName) ?></td>
+                             <?php
+                        $receiverAccountId = $row['receiver_accountId'];
+                            $receiverNameSql = "SELECT name FROM Customer WHERE customerId = (SELECT customerId FROM Account WHERE accountId = $receiverAccountId)";
+                            $receiverNameResult = $conn->query($receiverNameSql);
+                            $receiverName = ($receiverNameResult && $receiverNameResult->num_rows > 0) ? $receiverNameResult->fetch_assoc()['name'] : 'N/A';
+                        ?>
+                        <td><?= htmlspecialchars($receiverName) ?></td>
                             <td><?= number_format($row['amount'], 2) ?></td>
                             <td><?= htmlspecialchars($row['timestamp']) ?></td>
                             <td><?= htmlspecialchars(ucfirst($row['status'])) ?></td>

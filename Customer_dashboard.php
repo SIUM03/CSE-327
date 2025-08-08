@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION['userType']) || $_SESSION['userType'] !== 'Customer') {
-    header('Location: Login_page.php');
+    header('Location: index.php');
     exit();
 }
 
@@ -10,6 +10,11 @@ $name = $_SESSION['username'];
 $email = $_SESSION['email'];
 $phone = $_SESSION['phone'];
 $address = $_SESSION['address'];
+$sql= "SELECT customerId FROM Customer WHERE email = '$email'";
+$conn = new mysqli("localhost", "root", "", "banking_system");
+$result = $conn->query($sql);
+$customerId = $result->fetch_assoc()['customerId'];
+$accountId = $conn->query("SELECT accountID FROM Account WHERE customerId = $customerId")->fetch_assoc()['accountID'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -164,11 +169,11 @@ $address = $_SESSION['address'];
     <div class="dashboard-container">
         <!-- Sidebar -->
         <aside class="sidebar">
-            <div class="logo">💼 Dashboard</div>
+            <div class="logo" onclick="window.location.href='Customer_dashboard.php'"> 💼 Dashboard</div>
             <ul class="nav-links">
                 <li><button><i class="fa-regular fa-user"></i> Edit Profile</button></li>
-                <li><button><i class="fa-solid fa-ticket"></i> Balance Check</button></li>
-                <li><button><i class="fa-solid fa-money-bill-transfer"></i> Fund Transfer</button></li>
+                <li><button onclick="window.location.href='check_balance.php'"><i class="fa-solid fa-ticket"></i> Balance Check</button></li>
+                <li><button onclick="window.location.href='fund_transfer.php'"><i class="fa-solid fa-money-bill-transfer"></i> Fund Transfer</button></li>
                 <li><button onclick="window.location.href='Customer_Transaction_History.php'"><i
                             class="fa-solid fa-clock-rotate-left"></i> Transaction Report</button></li>
                 <li><button onclick="window.location.href='index.php'"><i class="fa-solid fa-right-from-bracket"></i>
@@ -182,9 +187,11 @@ $address = $_SESSION['address'];
             <section class="overview">
                 <h2>Welcome, <span><?= htmlspecialchars($name) ?></span> 👋</h2>
                 <div class="info">
+                    <p><strong>Acc Number:</strong> <?= htmlspecialchars($accountId) ?></p>
                     <p><strong>Email:</strong> <?= htmlspecialchars($email) ?></p>
                     <p><strong>Phone:</strong> <?= htmlspecialchars($phone) ?></p>
                     <p><strong>Location:</strong> <?= htmlspecialchars($address) ?></p>
+
                 </div>
             </section>
         </main>
