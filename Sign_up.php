@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if ($conn->query($account_sql) === TRUE) {
             echo "<script>
               alert('Account created successfully!');
-              window.location.href = 'Login_page.php';
+              window.location.href = 'index.php';
             </script>";
         } else {
             echo "<script>alert('Error creating account: " . $conn->error . "');</script>";
