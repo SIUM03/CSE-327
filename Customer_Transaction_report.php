@@ -149,7 +149,7 @@ $transactionResult = $conn->query($transactionSql);
 
 <body>
     <div class="container">
-        <h1 class="container__title">📜 Transaction History</h1>
+        <h1 class="container__title">📜 Transaction Report</h1>
 
         <?php if ($transactionResult->num_rows > 0): ?>
             <table>
