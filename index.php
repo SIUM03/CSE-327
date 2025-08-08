@@ -299,7 +299,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <body>
 
     <div class="welcome-text">
-        <h1>Welcome Back!</h1>
+        <h1>Welcome Back to Bankii!</h1>
         <p>Please login to continue.</p>
     </div>
 
