@@ -1,0 +1,159 @@
+/* ===== Base Styles ===== */
+.body {
+  background: #eef4f9; /* Light Airbub-style background */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  margin: auto;
+  max-width: 1200px;
+  padding: 25px;
+}
+
+.container__title {
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* ===== Search Bar ===== */
+.search-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.search-bar__input {
+  background: #f7fbff;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  flex: 1 1 200px;
+  padding: 12px;
+  transition: 0.3s;
+}
+
+.search-bar__input:focus {
+  background: #e6f0ff;
+  border-color: #007bff;
+  outline: none;
+}
+
+.search-bar__button {
+  background-color: #007bff;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  padding: 12px 20px;
+  transition: 0.3s;
+}
+
+.search-bar__button:hover {
+  background-color: #0056b3;
+}
+
+/* ===== Table Styling ===== */
+.table {
+  border-collapse: collapse;
+  border-radius: 12px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.table__cell,
+.table__header {
+  padding: 14px 18px;
+  text-align: center;
+}
+
+.table__header {
+  background-color: #007bff;
+  color: white;
+}
+
+.table__row:nth-child(even) {
+  background-color: #f9fbfd;
+}
+
+/* ===== Status Badge ===== */
+.status {
+  display: inline-block;
+  font-size: 0.9rem;
+  font-weight: bold;
+  padding: 6px 14px;
+  border-radius: 16px;
+}
+
+.status--resolved {
+  background-color: #28a745;
+  color: white;
+}
+
+.status--open {
+  background-color: #dc3545;
+  color: white;
+}
+
+.status--in-work {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+/* ===== Transaction Button ===== */
+.trans-btn {
+  background-color: #17a2b8;
+  border-radius: 8px;
+  color: white;
+  font-size: 14px;
+  padding: 6px 14px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.trans-btn:hover {
+  background-color: #138496;
+}
+
+/* ===== Responsive Table for Mobile ===== */
+@media (max-width: 768px) {
+  .table__header {
+    display: none;
+  }
+
+  .table,
+  .table tbody,
+  .table__row,
+  .table__cell {
+    display: block;
+    width: 100%;
+  }
+
+  .table__row {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    padding: 12px;
+  }
+
+  .table__cell {
+    padding-left: 50%;
+    position: relative;
+    text-align: right;
+  }
+
+  .table__cell::before {
+    color: #555;
+    content: attr(data-label);
+    font-weight: bold;
+    left: 12px;
+    position: absolute;
+    top: 12px;
+  }
+}
