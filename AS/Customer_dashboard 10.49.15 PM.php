@@ -173,11 +173,13 @@ $accountId = $conn->query("SELECT accountID FROM Account WHERE customerId = $cus
             <ul class="nav-links">
                 <li><button><i class="fa-regular fa-user"></i> Edit Profile</button></li>
                 <li><button onclick="window.location.href='check_balance.php'"><i class="fa-solid fa-ticket"></i> Balance Check</button></li>
+                <li><button onclick="window.location.href='deposit.php'"><i class="fa-solid fa-ticket"></i> Deposit </button></li>
+                <li><button onclick="window.location.href='withdrawl.php'"><i class="fa-solid fa-ticket"></i> Withdrawl</button></li>
                 <li><button onclick="window.location.href='fund_transfer.php'"><i class="fa-solid fa-money-bill-transfer"></i> Fund Transfer</button></li>
                 <li><button onclick="window.location.href='Customer_Transaction_report.php'"><i
                             class="fa-solid fa-clock-rotate-left"></i> Transaction Report</button></li>
                 <li><button onclick="window.location.href='index.php'"><i class="fa-solid fa-right-from-bracket"></i>
-                        Sign Out</button></li>
+                    Sign Out</button></li>
                 <li><button><i class="fa-solid fa-circle-info"></i> Help</button></li>
             </ul>
         </aside>
@@ -197,5 +199,3 @@ $accountId = $conn->query("SELECT accountID FROM Account WHERE customerId = $cus
         </main>
     </div>
 </body>
-
-</h
