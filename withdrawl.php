@@ -1,9 +1,38 @@
 <?php
 session_start();
 
-if (!isset($_SESSION['userType']) || $_SESSION['userType'] !== 'Customer') {
-    header('Location: Login_page.php');
-    exit();
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $amount = $_POST["amount"];
+
+    // Connect to the database
+    $conn = new mysqli("localhost", "root", "", "banking_system");
+
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    $balanceQuery = "SELECT Balance FROM Account WHERE accountID = (SELECT accountID FROM Account WHERE customerId = {$_SESSION['userId']})";
+    $balanceResult = $conn->query($balanceQuery);
+    $balance = $balanceResult->fetch_assoc()['Balance'];
+
+    if( $amount <= 0 || $amount > $balance) {
+         $transferQuery = "INSERT INTO Transactions (transactionID, type, sender_accountId, receiver_accountId, amount, timestamp, status) 
+                      VALUES (NULL, 'withdrawal', (SELECT accountID FROM Account WHERE customerId = {$_SESSION['userId']}), 100, '$amount', NOW(), 'Failed')";
+                      $conn->query($transferQuery);
+        echo "<script>alert('Please enter a valid amount.');window.location.href = 'check_balance.php';</script>";
+        exit();
+    }
+
+    $withdrawalQuery = "INSERT INTO Transactions (transactionID, type, sender_accountId, receiver_accountId, amount, timestamp, status) 
+                      VALUES (NULL, 'withdrawal', (SELECT accountID FROM Account WHERE customerId = {$_SESSION['userId']}), 100, '$amount', NOW(), 'completed')";
+    $updateBalanceQuery = "UPDATE Account SET Balance = Balance - '$amount' WHERE accountID = (SELECT accountID FROM Account WHERE customerId = {$_SESSION['userId']})";
+
+    if ($conn->query($withdrawalQuery) === TRUE && $conn->query($updateBalanceQuery) === TRUE ) {
+
+        echo "<script>alert('Withdrawal successful!'); window.location.href = 'check_balance.php';</script>";
+    } else {
+
+        echo "<script>alert('Error during withdrawal: " . $conn->error . "');</script>";
+    }
 }
 
 $name = $_SESSION['username'];
@@ -141,6 +170,33 @@ $balance = $balanceResult->fetch_assoc()['Balance'];
             margin: 8px 0;
             color: #333;
         }
+            .down_subtitle a {
+            color: #1daa5f;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .down_subtitle a:hover {
+            text-decoration: underline;
+        }
+            .signup_submit {
+            background-color: #1daa5f;
+            color: white;
+            padding: 7px;
+            margin: 5px 0;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+        }
+
+        .signup_submit:hover {
+            background-color: #158a4a;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+        }
 
         @media (max-width: 768px) {
             .dashboard-container {
@@ -163,6 +219,69 @@ $balance = $balanceResult->fetch_assoc()['Balance'];
             .main-content {
                 padding: 20px;
             }
+              .form-container {
+            width: 100%;
+            max-width: 450px;
+            background: #ffffffee;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            animation: slideInForm 0.8s ease-out;
+        }
+
+        @keyframes slideInForm {
+            0% {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        #signup_form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .form_header {
+            font-size: 28px;
+            font-weight: 700;
+            color: #117a4f;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            width: 100%;
+        }
+        input,
+        select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: 0.3s ease, box-shadow 0.3s ease;
+            background-color: #f9f9f9;
+            color: #1b1b1b;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #1daa5f;
+            background-color: #fff;
+            outline: none;
+            box-shadow: 0 0 8px rgba(29, 170, 95, 0.6);
+        }
+
+        input::placeholder {
+            color: #aaa;
+        }
+
         }
     </style>
 </head>
@@ -188,7 +307,7 @@ $balance = $balanceResult->fetch_assoc()['Balance'];
 
         <!-- Main Content -->
         <main class="main-content">
-         <section class="overview" 
+                     <section class="overview" 
          style="max-width: 480px; 
                 margin: 20px auto; 
                 padding: 20px; 
@@ -226,7 +345,69 @@ $balance = $balanceResult->fetch_assoc()['Balance'];
         </p>
     </div>
 </section>
+            <div class="form-container">
+       <div style="
+    background: rgba(255, 255, 255, 0.15);
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 420px;
+    width: 100%;
+    margin-top: 20px;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+">
+    <form method="POST" action="">
+        <h2 style="
+            font-size: 24px;
+            font-weight: 700;
+            color: #117a4f;
+            text-align: center;
+            margin-bottom: 20px;
+        ">💸 Withdraw Funds</h2>
+        
+        <div style="margin-bottom: 20px;">
+            <label for="amount" style="
+                font-size: 14px;
+                font-weight: 600;
+                color: #333;
+                margin-bottom: 6px;
+                display: block;
+            ">Amount (BDT)</label>
+            <input type="number" name="amount" id="amount" min="1" step="0.01" placeholder="Enter amount" required
+                style="
+                    width: 100%;
+                    padding: 12px 16px;
+                    font-size: 16px;
+                    border-radius: 12px;
+                    border: 2px solid transparent;
+                    background-color: rgba(255, 255, 255, 0.85);
+                    transition: all 0.3s ease;
+                "
+                onfocus="this.style.borderColor='#1daa5f'; this.style.backgroundColor='#fff'; this.style.boxShadow='0 0 8px rgba(29, 170, 95, 0.6)';"
+                onblur="this.style.borderColor='transparent'; this.style.backgroundColor='rgba(255,255,255,0.85)'; this.style.boxShadow='none';"
+            >
+        </div>
+        
+        <button type="submit" style="
+            width: 100%;
+            padding: 14px;
+            font-size: 18px;
+            font-weight: bold;
+            color: white;
+            background: linear-gradient(135deg, #1daa5f, #117a4f);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.3s ease;
+        " 
+        onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 8px 18px rgba(0,0,0,0.2)';"
+        onmouseout="this.style.transform='none'; this.style.boxShadow='none';"
+        >Withdraw Now</button>
+    </form>
+</div>
 
         </main>
     </div>
 </body>
+

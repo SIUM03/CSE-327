@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 08, 2025 at 01:15 PM
+-- Generation Time: Aug 08, 2025 at 06:08 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -41,14 +41,14 @@ CREATE TABLE `Account` (
 
 INSERT INTO `Account` (`accountId`, `type`, `status`, `Balance`, `customerId`) VALUES
 (100, 'savings', 'active', 0, 0),
-(101, 'savings', 'inactive', 50000, 1),
+(101, 'savings', 'inactive', 50996, 1),
 (102, 'current', 'active', 20000, 2),
-(103, 'fixed', 'closed', 68723.54, 3),
+(103, 'fixed', 'closed', 66927.54, 3),
 (104, 'fixed', 'inactive', 49246.94, 4),
-(105, 'current', 'closed', 1814.98, 5),
+(105, 'current', 'closed', 2014.98, 5),
 (106, 'fixed', 'active', 91389.91, 6),
 (107, 'savings', 'active', 47133.77, 7),
-(108, 'current', 'inactive', 13224.91, 8),
+(108, 'current', 'inactive', 13824.91, 8),
 (109, 'fixed', 'closed', 28037.06, 9),
 (110, 'current', 'inactive', 88565.15, 10),
 (111, 'current', 'closed', 29255.36, 11),
@@ -62,7 +62,18 @@ INSERT INTO `Account` (`accountId`, `type`, `status`, `Balance`, `customerId`) V
 (119, 'current', 'active', 65921.76, 19),
 (120, 'savings', 'closed', 89185.08, 20),
 (121, 'fixed', 'active', 36420.21, 21),
-(122, 'fixed', 'inactive', 60219.69, 22);
+(122, 'fixed', 'inactive', 60219.69, 22),
+(123, 'savings', 'active', 300, 24),
+(124, 'savings', 'active', 200, 25),
+(125, 'savings', 'active', 23, 28),
+(126, 'savings', 'active', 400, 29),
+(127, 'savings', 'active', 400, 30),
+(128, 'savings', 'active', 1000, 31),
+(129, 'savings', 'active', 1000, 32),
+(130, 'savings', 'active', 1000, 33),
+(131, 'savings', 'active', 4000, 34),
+(132, 'savings', 'active', 1300, 35),
+(133, 'savings', 'active', 200, 36);
 
 -- --------------------------------------------------------
 
@@ -108,7 +119,21 @@ INSERT INTO `Customer` (`customerId`, `name`, `nid`, `phone`, `email`, `address`
 (19, 'Customer_19', 1234567919, '01700000019', 'customer19@example.com', 'City_19, BD', 1, 'changeme'),
 (20, 'Customer_20', 1234567920, '01700000020', 'customer20@example.com', 'City_20, BD', 1, 'changeme'),
 (21, 'Customer_21', 1234567921, '01700000021', 'customer21@example.com', 'City_21, BD', 0, 'changeme'),
-(22, 'Customer_22', 1234567922, '01700000022', 'customer22@example.com', 'City_22, BD', 0, 'changeme');
+(22, 'Customer_22', 1234567922, '01700000022', 'customer22@example.com', 'City_22, BD', 0, 'changeme'),
+(23, 'MD. ABDUL WADUD', 343, '01314751104', 'sium1111111@gmail.com', 'Jalalpur,pabna', 0, '1212'),
+(24, 'MD. ABDUL WADUD', 34, '01314751104', 'sium1111111@gmail.com', 'Jalalpur,pabna', 0, '22'),
+(25, 'MD. ABDUL WADU3', 33, '013147511042', 'sium1111111@gmail.com', 'Jalalpur,pabna', 0, '11'),
+(26, 'sium', 0, '11', '00@g', '22', 0, '33'),
+(27, 'MD. ABDUL WADUD', 232, '01314751104', 'sium1111111@gmail.com', 'Jalalpur,pabna', 0, '33'),
+(28, 'MD. ABDUL WADUD', 2, '01314751104', 'sium1111111@gmail.com', 'Jalalpur,pabna', 1, '32'),
+(29, '33', 32, '232', 'sdf@sfgg', '22', 1, '33'),
+(30, 'MD. ABDUL WADUD', 45, '01314751104', 'sium1111111@gmail.com', 'Jalalpur,pabna', 1, '33'),
+(31, 'Sium', 2323372042, '11', 'sium@com', '11', 1, '22'),
+(32, 'Sium004', 223, '11', 'sium@coo', '11', 1, '22'),
+(33, 'sss', 11, '11', '11@11', '11', 1, '22'),
+(34, 'MD. ABDUL WADUD', 3, '01314751104', 'sium1111111@gmail.com', 'Jalalpur,pabna', 1, '44'),
+(35, 'Arifin Sultana Radia', 2232121, '01354587457', 'radia04@gmail.com', 'mirpur', 1, '0987'),
+(36, 'MD. ABDUL WADUD', 232323, '01314751104', 'sium04@gmail.com', 'Jalalpur,pabna', 1, '1234');
 
 -- --------------------------------------------------------
 
@@ -247,36 +272,61 @@ CREATE TABLE `Transactions` (
   `receiver_accountId` bigint(20) DEFAULT NULL,
   `amount` double DEFAULT NULL,
   `timestamp` datetime DEFAULT NULL,
-  `status` enum('pending','completed','failed') DEFAULT NULL,
-  `verificationID` varchar(50) DEFAULT NULL
+  `status` enum('pending','completed','failed') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `Transactions`
 --
 
-INSERT INTO `Transactions` (`transactionId`, `type`, `sender_accountId`, `receiver_accountId`, `amount`, `timestamp`, `status`, `verificationID`) VALUES
-(1001, 'transfer', 101, 102, 1000, '2025-08-04 00:24:00', 'completed', 'KYC001'),
-(1002, 'transfer', 117, 115, 6683.99, '2025-07-12 10:53:47', 'completed', 'KYC101'),
-(1003, 'withdrawal', 103, 100, 798.6, '2025-07-24 10:53:47', 'pending', 'KYC102'),
-(1004, 'withdrawal', 114, 100, 3696.01, '2025-07-24 10:53:47', 'failed', 'KYC103'),
-(1005, 'deposit', 100, 117, 3054.75, '2025-08-07 10:53:47', 'completed', 'KYC104'),
-(1006, 'transfer', 118, 109, 1911.74, '2025-08-01 10:53:47', 'completed', 'KYC105'),
-(1007, 'transfer', 103, 112, 7675.42, '2025-08-08 10:53:47', 'pending', 'KYC106'),
-(1008, 'transfer', 119, 113, 5182.42, '2025-07-16 10:53:47', 'failed', 'KYC107'),
-(1009, 'transfer', 122, 110, 3959.42, '2025-07-30 10:53:47', 'pending', 'KYC108'),
-(1010, 'deposit', 100, 107, 2076.32, '2025-07-09 10:53:47', 'completed', 'KYC109'),
-(1011, 'transfer', 114, 121, 5890.75, '2025-07-29 10:53:47', 'pending', 'KYC110'),
-(1012, 'deposit', 100, 113, 9573.24, '2025-08-08 10:53:47', 'completed', 'KYC111'),
-(1013, 'deposit', 100, 107, 3080.04, '2025-08-08 10:53:47', 'pending', 'KYC112'),
-(1014, 'transfer', 115, 108, 9441.15, '2025-08-05 10:53:47', 'completed', 'KYC113'),
-(1015, 'deposit', 100, 116, 4896.31, '2025-08-08 10:53:47', 'pending', 'KYC114'),
-(1016, 'transfer', 118, 108, 5298.91, '2025-08-06 10:53:47', 'completed', 'KYC115'),
-(1017, 'withdrawal', 108, 100, 3623.79, '2025-07-19 10:53:47', 'pending', 'KYC116'),
-(1018, 'deposit', 100, 112, 7171.96, '2025-07-27 10:53:47', 'failed', 'KYC117'),
-(1019, 'withdrawal', 103, 100, 5328.1, '2025-07-25 10:53:47', 'failed', 'KYC118'),
-(1020, 'transfer', 112, 122, 803.31, '2025-07-25 10:53:47', 'pending', 'KYC119'),
-(1021, 'withdrawal', 103, 100, 4435.73, '2025-07-28 10:53:47', 'pending', 'KYC120');
+INSERT INTO `Transactions` (`transactionId`, `type`, `sender_accountId`, `receiver_accountId`, `amount`, `timestamp`, `status`) VALUES
+(1001, 'transfer', 101, 102, 1000, '2025-08-04 00:24:00', 'completed'),
+(1002, 'transfer', 117, 115, 6683.99, '2025-07-12 10:53:47', 'completed'),
+(1003, 'withdrawal', 103, 100, 798.6, '2025-07-24 10:53:47', 'pending'),
+(1004, 'withdrawal', 114, 100, 3696.01, '2025-07-24 10:53:47', 'failed'),
+(1005, 'deposit', 100, 117, 3054.75, '2025-08-07 10:53:47', 'completed'),
+(1006, 'transfer', 118, 109, 1911.74, '2025-08-01 10:53:47', 'completed'),
+(1007, 'transfer', 103, 112, 7675.42, '2025-08-08 10:53:47', 'pending'),
+(1008, 'transfer', 119, 113, 5182.42, '2025-07-16 10:53:47', 'failed'),
+(1009, 'transfer', 122, 110, 3959.42, '2025-07-30 10:53:47', 'pending'),
+(1010, 'deposit', 100, 107, 2076.32, '2025-07-09 10:53:47', 'completed'),
+(1011, 'transfer', 114, 121, 5890.75, '2025-07-29 10:53:47', 'pending'),
+(1012, 'deposit', 100, 113, 9573.24, '2025-08-08 10:53:47', 'completed'),
+(1013, 'deposit', 100, 107, 3080.04, '2025-08-08 10:53:47', 'pending'),
+(1014, 'transfer', 115, 108, 9441.15, '2025-08-05 10:53:47', 'completed'),
+(1015, 'deposit', 100, 116, 4896.31, '2025-08-08 10:53:47', 'pending'),
+(1016, 'transfer', 118, 108, 5298.91, '2025-08-06 10:53:47', 'completed'),
+(1017, 'withdrawal', 108, 100, 3623.79, '2025-07-19 10:53:47', 'pending'),
+(1018, 'deposit', 100, 112, 7171.96, '2025-07-27 10:53:47', 'failed'),
+(1019, 'withdrawal', 103, 100, 5328.1, '2025-07-25 10:53:47', 'failed'),
+(1020, 'transfer', 112, 122, 803.31, '2025-07-25 10:53:47', 'pending'),
+(1021, 'withdrawal', 103, 100, 4435.73, '2025-07-28 10:53:47', 'pending'),
+(1022, 'deposit', 100, 101, 200, '2025-08-08 17:22:01', 'completed'),
+(1023, 'deposit', 100, 101, 200, '2025-08-08 17:22:01', 'completed'),
+(1024, 'deposit', 100, 131, 4000, '2025-08-08 18:51:39', 'completed'),
+(1025, 'transfer', 103, 101, 200, '2025-08-08 19:55:43', 'completed'),
+(1028, 'transfer', 103, 102, 3000, '2025-08-08 19:56:16', 'completed'),
+(1029, 'transfer', 103, 104, 344, '2025-08-08 19:56:27', 'completed'),
+(1030, 'transfer', 103, 105, 200, '2025-08-08 19:58:38', 'completed'),
+(1031, 'transfer', 103, 101, 1000, '2025-08-08 19:59:05', 'completed'),
+(1032, 'transfer', 103, 108, 300, '2025-08-08 20:03:01', 'completed'),
+(1033, 'transfer', 103, 101, 300, '2025-08-08 20:04:23', 'completed'),
+(1035, 'transfer', 103, 101, -2, '2025-08-08 20:06:57', 'completed'),
+(1036, 'transfer', 103, 101, -2, '2025-08-08 20:08:25', 'completed'),
+(1037, 'transfer', 103, 101, -2, '2025-08-08 20:09:59', 'failed'),
+(1038, 'transfer', 103, 101, 67000, '2025-08-08 20:11:39', 'failed'),
+(1039, 'transfer', 101, 108, 300, '2025-08-08 20:13:33', 'completed'),
+(1040, 'deposit', 100, 132, 1000, '2025-08-08 20:23:09', 'completed'),
+(1041, 'deposit', 100, 133, 500, '2025-08-08 20:24:24', 'completed'),
+(1042, 'transfer', 132, 133, -2, '2025-08-08 20:30:45', 'failed'),
+(1043, 'transfer', 132, 133, 1200, '2025-08-08 20:31:08', 'failed'),
+(1044, 'transfer', 132, 133, 200, '2025-08-08 20:31:25', 'completed'),
+(1045, 'transfer', 133, 132, 500, '2025-08-08 20:53:35', 'completed'),
+(1046, 'transfer', 101, 133, -2, '2025-08-08 21:37:18', 'failed'),
+(1047, 'transfer', 101, 132, -3, '2025-08-08 21:37:39', 'failed'),
+(1048, 'transfer', 101, 132, -3, '2025-08-08 21:38:58', 'failed'),
+(1049, 'transfer', 102, 133, -4, '2025-08-08 21:40:11', 'failed'),
+(1050, 'transfer', 102, 133, 300000, '2025-08-08 21:40:24', 'failed');
 
 --
 -- Indexes for dumped tables
@@ -323,6 +373,16 @@ ALTER TABLE `Transactions`
   ADD PRIMARY KEY (`transactionId`),
   ADD KEY `sender_accountId` (`sender_accountId`),
   ADD KEY `receiver_accountId` (`receiver_accountId`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `Transactions`
+--
+ALTER TABLE `Transactions`
+  MODIFY `transactionId` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1051;
 
 --
 -- Constraints for dumped tables

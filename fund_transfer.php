@@ -302,6 +302,8 @@ $balance = $balanceResult->fetch_assoc()['Balance'];
             <ul class="nav-links">
                 <li><button><i class="fa-regular fa-user"></i> Edit Profile</button></li>
                 <li><button onclick="window.location.href='check_balance.php'"><i class="fa-solid fa-ticket"></i> Balance Check</button></li>
+                  <li><button onclick="window.location.href='deposit.php'"><i class="fa-solid fa-ticket"></i> Deposit </button></li>
+                <li><button onclick="window.location.href='withdrawl.php'"><i class="fa-solid fa-ticket"></i> Withdrawl</button></li>
                 <li><button onclick="window.location.href='fund_transfer.php'"><i class="fa-solid fa-money-bill-transfer"></i> Fund Transfer</button></li>
                 <li><button onclick="window.location.href='Customer_Transaction_report.php'"><i
                             class="fa-solid fa-clock-rotate-left"></i> Transaction Report</button></li>
@@ -313,25 +315,118 @@ $balance = $balanceResult->fetch_assoc()['Balance'];
 
         <!-- Main Content -->
         <main class="main-content">
-            <section class="overview">
-                <h2>Hello, <span><?= htmlspecialchars($name) ?></span> </h2>
-                <div class="info">
-                    <p>You have <strong><?= htmlspecialchars($balance) ?>  BDT</strong> on your Account</p>
-                </div>
-            </section>
+            <section class="overview" 
+         style="max-width: 480px; 
+                margin: 20px auto; 
+                padding: 20px; 
+                background: linear-gradient(135deg, #ffffff, #f3f8f6); 
+                border-radius: 15px; 
+                box-shadow: 0 6px 20px rgba(0,0,0,0.1); 
+                text-align: center; 
+                font-family: Arial, sans-serif;">
+    
+    <h2 style="font-size: 24px; 
+               color: #333; 
+               margin-bottom: 15px;">
+        👋 Hello, 
+        <span style="color: #1daa5f; font-weight: bold;">
+            <?= htmlspecialchars($name) ?>
+        </span>
+    </h2>
+
+    <div class="info" 
+         style="background: linear-gradient(135deg, #1daa5f, #117a4f); 
+                padding: 15px 20px; 
+                border-radius: 12px; 
+                color: white; 
+                font-size: 18px; 
+                font-weight: 500; 
+                box-shadow: 0 6px 15px rgba(0,0,0,0.15); 
+                text-align: left; 
+                margin-top: 10px;">
+        <p style="margin: 0;">
+            💰 You have 
+            <strong style="font-size: 20px; color: #ffe47a;">
+                <?= htmlspecialchars($balance) ?> BDT
+            </strong> 
+            in your account
+        </p>
+    </div>
+</section>
+
             <div class="form-container">
-        <form id="signup_form" method="POST" action="">
-            <div class="form_header">Fund Transfer</div>
+       <form id="signup_form" method="POST" action="" 
+      style="background: rgba(255, 255, 255, 0.15); 
+             padding: 30px; 
+             border-radius: 20px; 
+             max-width: 420px; 
+             width: 100%; 
+             margin-top: 20px; 
+             backdrop-filter: blur(12px); 
+             border: 1px solid rgba(255, 255, 255, 0.3); 
+             box-shadow: 0 8px 25px rgba(0,0,0,0.15); 
+             text-align: center;">
 
+    <div style="font-size: 22px; 
+                font-weight: 700; 
+                color: #117a4f; 
+                margin-bottom: 20px;">
+        💸 Fund Transfer
+    </div>
 
-            <div class="form-group"><input type="positive-number" name="amount" placeholder="Amount" required></div> 
-            <div class="form-group"><input type="positive-number" name="accountNo" placeholder="Receiver ACC No" required></div>
+    <div class="form-group" style="margin-bottom: 20px;">
+        <input type="number" name="amount" min="1" step="0.01" placeholder="Amount (BDT)" required
+               style="width: 100%; 
+                      padding: 12px 16px; 
+                      font-size: 16px; 
+                      border-radius: 12px; 
+                      border: 2px solid transparent; 
+                      background-color: rgba(255, 255, 255, 0.85); 
+                      transition: all 0.3s ease;"
+               onfocus="this.style.borderColor='#1daa5f'; 
+                        this.style.backgroundColor='#fff'; 
+                        this.style.boxShadow='0 0 8px rgba(29, 170, 95, 0.6)';"
+               onblur="this.style.borderColor='transparent'; 
+                       this.style.backgroundColor='rgba(255,255,255,0.85)'; 
+                       this.style.boxShadow='none';">
+    </div> 
 
-            <button type="submit" class="signup_submit">Transfer</button>
+    <div class="form-group" style="margin-bottom: 20px;">
+        <input type="number" name="accountNo" min="1" step="1" placeholder="Receiver ACC No" required
+               style="width: 100%; 
+                      padding: 12px 16px; 
+                      font-size: 16px; 
+                      border-radius: 12px; 
+                      border: 2px solid transparent; 
+                      background-color: rgba(255, 255, 255, 0.85); 
+                      transition: all 0.3s ease;"
+               onfocus="this.style.borderColor='#1daa5f'; 
+                        this.style.backgroundColor='#fff'; 
+                        this.style.boxShadow='0 0 8px rgba(29, 170, 95, 0.6)';"
+               onblur="this.style.borderColor='transparent'; 
+                       this.style.backgroundColor='rgba(255,255,255,0.85)'; 
+                       this.style.boxShadow='none';">
+    </div>
 
-        </form>
+    <button type="submit" 
+            style="width: 100%; 
+                   padding: 14px; 
+                   font-size: 18px; 
+                   font-weight: bold; 
+                   color: white; 
+                   background: linear-gradient(135deg, #1daa5f, #117a4f); 
+                   border: none; 
+                   border-radius: 12px; 
+                   cursor: pointer; 
+                   transition: transform 0.2s ease, box-shadow 0.3s ease;"
+            onmouseover="this.style.transform='translateY(-2px)'; 
+                         this.style.boxShadow='0 8px 18px rgba(0,0,0,0.2)';"
+            onmouseout="this.style.transform='none'; 
+                        this.style.boxShadow='none';">
+        Transfer
+    </button>
+</form>
+
         </main>
     </div>
 </body>
-
-</h
