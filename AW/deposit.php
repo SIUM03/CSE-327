@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
          $transferQuery = "INSERT INTO Transactions (transactionID, type, sender_accountId, receiver_accountId, amount, timestamp, status) 
                       VALUES (NULL, 'deposit',100, (SELECT accountID FROM Account WHERE customerId = {$_SESSION['userId']}), '$amount', NOW(), 'Failed')";
                       $conn->query($transferQuery);
-        echo "<script>alert('Please enter a valid amount.');window.location.href = 'check_balance.php';</script>";
+        echo "<script>alert('Please enter a valid amount.');window.location.href = '../TA/check_balance.php';</script>";
         exit();
     }
     $balanceQuery = "SELECT Balance FROM Account WHERE accountID = (SELECT accountID FROM Account WHERE customerId = {$_SESSION['userId']})";
@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     if ($conn->query($depositQuery) === TRUE && $conn->query($updateBalanceQuery) === TRUE ) {
 
-        echo "<script>alert('Deposit successful!'); window.location.href = 'check_balance.php';</script>";
+        echo "<script>alert('Deposit successful!'); window.location.href = '../TA/check_balance.php';</script>";
     } else {
 
         echo "<script>alert('Error during deposit: " . $conn->error . "');</script>";
@@ -297,7 +297,7 @@ $balance = $balanceResult->fetch_assoc()['Balance'];
                 <li><button onclick="window.location.href='deposit.php'"><i class="fa-solid fa-ticket"></i> Deposit </button></li>
                 <li><button onclick="window.location.href='withdrawl.php'"><i class="fa-solid fa-ticket"></i> Withdrawl</button></li>
                 <li><button onclick="window.location.href='fund_transfer.php'"><i class="fa-solid fa-money-bill-transfer"></i> Fund Transfer</button></li>
-                <li><button onclick="window.location.href='..AS/Customer_Transaction_report.php'"><i
+                <li><button onclick="window.location.href='../AS/Customer_Transaction_report.php'"><i
                             class="fa-solid fa-clock-rotate-left"></i> Transaction Report</button></li>
                 <li><button onclick="window.location.href='..AS/index.php'"><i class="fa-solid fa-right-from-bracket"></i>
                     Sign Out</button></li>

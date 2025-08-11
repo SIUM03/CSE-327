@@ -171,7 +171,7 @@ $balance = $balanceResult->fetch_assoc()['Balance'];
     <div class="dashboard-container">
         <!-- Sidebar -->
             <aside class="sidebar">
-            <div class="logo" onclick="window.location.href='Customer_dashboard.php'"> 💼 Dashboard</div>
+            <div class="logo" onclick="window.location.href='../AS/Customer_dashboard.php'"> 💼 Dashboard</div>
             <ul class="nav-links">
                 <li><button><i class="fa-regular fa-user"></i> Edit Profile</button></li>
                 <li><button onclick="window.location.href='check_balance.php'"><i class="fa-solid fa-ticket"></i> Balance Check</button></li>

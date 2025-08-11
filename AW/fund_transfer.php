@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
          $transferQuery = "INSERT INTO Transactions (transactionID, type, sender_accountId, receiver_accountId, amount, timestamp, status) 
                       VALUES (NULL, 'transfer', (SELECT accountID FROM Account WHERE customerId = {$_SESSION['userId']}), $accountId, '$amount', NOW(), 'Failed')";
                       $conn->query($transferQuery);
-        echo "<script>alert('Please enter a valid amount.');window.location.href = 'check_balance.php';</script>";
+        echo "<script>alert('Please enter a valid amount.');window.location.href = '../TA/check_balance.php';</script>";
         exit();
     }
     $balanceQuery = "SELECT Balance FROM Account WHERE accountID = (SELECT accountID FROM Account WHERE customerId = {$_SESSION['userId']})";
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
          $transferQuery = "INSERT INTO Transactions (transactionID, type, sender_accountId, receiver_accountId, amount, timestamp, status) 
                       VALUES (NULL, 'transfer', (SELECT accountID FROM Account WHERE customerId = {$_SESSION['userId']}), $accountId, '$amount', NOW(), 'Failed')";
                       $conn->query($transferQuery);
-        echo "<script>alert('Insufficient balance.');window.location.href = 'check_balance.php';</script>";
+        echo "<script>alert('Insufficient balance.');window.location.href = '../TA/check_balance.php';</script>";
         exit();
     }
 
@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $receiverBalanceQuery = "UPDATE Account SET Balance = Balance + '$amount' WHERE accountID = $accountId";
     if ($conn->query($transferQuery) === TRUE && $conn->query($updateBalanceQuery) === TRUE && $conn->query($receiverBalanceQuery) === TRUE ) {
 
-        echo "<script>alert('Transfer successful!'); window.location.href = 'check_balance.php';</script>";
+        echo "<script>alert('Transfer successful!'); window.location.href = '../TA/check_balance.php';</script>";
     } else {
        
         echo "<script>alert('Error during transfer: " . $conn->error . "');</script>";
