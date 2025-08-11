@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Customer Service & Complaint Management Cell – City Bank</title>
+
+    <style>
+        /* ─── Design tokens ─────────────────────────────────────────── */
+        :root {
+            --bg: #ffffff;
+            --text: #1f2937;
+            --muted: #4b5563;
+            --brand: #c8102e;
+            /* City Bank red-ish */
+            --brand-ink: #991022;
+            --surface: #f8fafc;
+            --ring: 0 0 0 4px rgba(200, 16, 46, .12);
+            --radius: 14px;
+            --maxw: 980px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #0b0f14;
+                --text: #e5e7eb;
+                --muted: #a1a1aa;
+                --surface: #121821;
+                --brand: #ff3a56;
+                --brand-ink: #ff2342;
+            }
+        }
+
+        /* ─── Base ──────────────────────────────────────────────────── */
+        html,
+        body {
+            height: 100%
+        }
+
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+        .container {
+            max-width: var(--maxw);
+            margin: 0 auto;
+            padding: 28px 18px 64px;
+        }
+
+        h1 {
+            font-size: clamp(1.8rem, 1.2rem + 2.2vw, 2.6rem);
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin: 12px 0 18px;
+            text-wrap: balance;
+        }
+
+        h2 {
+            font-size: clamp(1.2rem, 1rem + .8vw, 1.45rem);
+            margin: 24px 0 8px;
+        }
+
+        h3 {
+            font-size: 1.05rem;
+            margin: 18px 0 6px;
+        }
+
+        p {
+            margin: 10px 0
+        }
+
+        .muted {
+            color: var(--muted)
+        }
+
+        a {
+            color: var(--brand);
+            text-underline-offset: 3px;
+            text-decoration-thickness: 1.5px;
+        }
+
+        a:hover {
+            color: var(--brand-ink)
+        }
+
+        .lead {
+            font-size: clamp(1rem, .95rem + .3vw, 1.1rem);
+        }
+
+        /* ─── Feature blocks ────────────────────────────────────────── */
+        .note {
+            background: var(--surface);
+            border: 1px solid color-mix(in oklab, var(--text) 12%, transparent);
+            border-radius: var(--radius);
+            padding: 14px 16px;
+            margin: 18px 0;
+        }
+
+        .steps {
+            counter-reset: step;
+            display: grid;
+            gap: 18px;
+            margin: 24px 0 10px;
+            padding: 0;
+        }
+
+        .step {
+            list-style: none;
+            background: var(--surface);
+            border: 1px solid color-mix(in oklab, var(--text) 10%, transparent);
+            border-radius: var(--radius);
+            padding: 18px 16px 14px;
+            box-shadow: 0 1px 0 color-mix(in oklab, var(--text) 7%, transparent);
+        }
+
+        .step>.step-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0 0 6px;
+        }
+
+        .badge {
+            inline-size: 34px;
+            block-size: 34px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            font-weight: 700;
+            background: var(--brand);
+            color: #fff;
+            box-shadow: var(--ring);
+            flex: 0 0 auto;
+        }
+
+        /* ─── Contact methods ───────────────────────────────────────── */
+        .contact-list {
+            display: grid;
+            gap: 10px;
+            margin: 10px 0 4px;
+            padding-left: 18px;
+        }
+
+        .contact-list li {
+            margin-block: 2px
+        }
+
+        /* ─── Cards grid ───────────────────────────────────────────── */
+        .cards {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 14px;
+            margin-top: 10px;
+        }
+
+        @media (min-width:720px) {
+            .cards {
+                grid-template-columns: repeat(2, 1fr)
+            }
+        }
+
+        .card {
+            border: 1px solid color-mix(in oklab, var(--text) 12%, transparent);
+            border-radius: var(--radius);
+            padding: 14px 16px;
+            background: var(--bg);
+        }
+
+        .card h4 {
+            margin: 0 0 4px;
+            font-size: 1.05rem;
+        }
+
+        .role {
+            font-weight: 600
+        }
+
+        address {
+            font-style: normal;
+            white-space: pre-line;
+            margin: 8px 0 0;
+        }
+
+
+        .tight {
+            margin-top: 6px
+        }
+
+        .spacer {
+            height: 8px
+        }
+
+        .small {
+            font-size: .94rem
+        }
+
+        .kbd {
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+            background: var(--surface);
+            padding: .15rem .35rem;
+            border-radius: 6px;
+            border: 1px solid color-mix(in oklab, var(--text) 14%, transparent);
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container">
+        <header>
+            <h1>Customer Service &amp; Complaint Management Cell</h1>
+            <p class="lead">
+                We believe in offering enjoyable experiences. If something isn't right, tell us—we'll handle it
+                confidentially and get you to the right people fast.
+            </p>
+            <div class="note small">
+                We welcome your service feedback at any time. Issues are discussed only with those who need to be
+                involved.
+            </div>
+        </header>
+
+        <ol class="steps">
+
+            <li class="step">
+                <div class="step-title">
+                    <span class="badge" aria-hidden="true">1</span>
+                    <h2>Contact your branch or our Customer Service Centers</h2>
+                </div>
+                <p>Please refer your problem to the concerned official of your branch first and explain how you'd like
+                    it resolved.</p>
+
+
+
+
+                <h3>BANKI Bank American Express Service Centers</h3>
+                <p>
+                    Cardmembers can call our 24/7 Call Center or visit any American Express Service Center.
+
+                </p>
+            </li>
+
+            <!-- Step 2 -->
+            <li class="step">
+                <div class="step-title">
+                    <span class="badge" aria-hidden="true">2</span>
+                    <h2>Branch Level Customer Service &amp; Complaints Management Desk (BLCS&amp;CMD)</h2>
+                </div>
+                <p>
+                    If not resolved, make a formal complaint to the <strong>Branch Manager</strong> (holder of the
+                    BLCS&amp;CMD).
+                    Collect a Complaint Lodgment Form from the Branch Manager, describe your concern in detail, and
+                    submit it.
+                    You may also call, fax, email, or deliver a letter by hand or post.
+                </p>
+
+            </li>
+
+
+            <li class="step">
+                <div class="step-title">
+                    <span class="badge" aria-hidden="true">3</span>
+                    <h2>Zonal Customer Service &amp; Complaints Management Cells (ZCS&amp;CMC)</h2>
+                </div>
+                <p>If still unresolved or unsatisfied, use any of the following:</p>
+                <ul class="contact-list">
+                    <li>Call <a href="tel">162345</a> (Bangladesh) or <a href="tel">+88-02-83310450</a>
+                    </li>
+                    <li>Email <a href="mailto:complaint.cell@bankibankplc.com">complaint.cell@citybankplc.com</a>.</li>
+                    <li>Fax <a href="fax:+88029884446">+88-02-98844464</a>.</li>
+                    <li>Or send a letter to any employee</li>
+                </ul>
+
+
+
+                <section aria-label="ZCS&CMC Contacts" class="cards">
+                    <article class="card">
+                        <h4>MD ABDUL WADUD (AW)</h4>
+                        <div class="role">Regional Head of Branches Dhaka North </div>
+                        <address>
+                            BANKI Bank PLC, Gulshan Branc
+                            Gulshan South Avenue, Gulshan-1, Dhaka-1212
+                        </address>
+                    </article>
+
+                    <article class="card">
+                        <h4>Ananto Shariar (AS)</h4>
+                        <div class="role">Regional Head of Branche Dhaka West </div>
+                        <address>
+                            BANKI Bank PLC, Dhanmondi Branch
+
+                            Dhanmondi R/A, Dhaka-1205
+                        </address>
+                    </article>
+
+                    <article class="card">
+                        <h4>Montasir Mahmud Saykat (MS)</h4>
+                        <div class="role">Regional Head of Branches Dhaka South </div>
+                        <address>
+                            BANKI Bank PLC, Principal Office Branch
+                            Jibon Bima Tower, 10 Dilkusha C/A, Dhaka-1000
+                        </address>
+                    </article>
+
+                    <article class="card">
+                        <h4>Tesha Akter (TA)</h4>
+                        <div class="role">Regional Head of Branches Dhaka</div>
+                        <address>
+                            BANKI Bank PLC,Bashundhara Branch
+                            DHAKA-4100
+                        </address>
+                    </article>
+                </section>
+            </li>
+        </ol>
+
+
+    </main>
+</body>
+
+</html>

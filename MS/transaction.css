@@ -1,0 +1,85 @@
+/* General Page Styling */
+body {
+    font-family: Arial, sans-serif;
+    background: #f5f7fa;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Container */
+.container {
+    background: #ffffff;
+    padding: 40px 50px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    box-sizing: border-box;
+}
+
+/* Heading */
+h2 {
+    color: #117a4f;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* Labels */
+label {
+    font-weight: 600;
+    color: #333333;
+}
+
+/* Input Fields & Dropdown */
+input[type="number"],
+select {
+    width: 100%;
+    padding: 10px 12px;
+    margin-top: 5px;
+    border: 1.8px solid #cccccc;
+    border-radius: 6px;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+/* Focus Effect */
+input[type="number"]:focus,
+select:focus {
+    border-color: #1daa5f;
+    outline: none;
+    background-color: #ffffff;
+}
+
+/* Submit Button */
+button[type="submit"] {
+    margin-top: 25px;
+    width: 100%;
+    padding: 14px;
+    background-color: #1daa5f;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    background-color: #158a4a;
+}
+
+/* Success Message */
+.message {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    text-align: center;
+}
