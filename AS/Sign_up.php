@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
     $customer_sql = "INSERT INTO Customer (customerId, name, nid, phone, email, address, kycstatus, password) 
-         VALUES ($customerId, '$name', '$nid', '$phone', '$email', '$address', 1, '$password')";
+         VALUES ($customerId, '$name', '$nid', '$phone', '$email', '$address', 0, '$password')";
 
     if ($conn->query($customer_sql) === TRUE) {
         echo "Successfully created customer record.";

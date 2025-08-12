@@ -171,7 +171,6 @@ $accountId = $conn->query("SELECT accountID FROM Account WHERE customerId = $cus
         <aside class="sidebar">
             <div class="logo" onclick="window.location.href='Customer_dashboard.php'"> 💼 Dashboard</div>
             <ul class="nav-links">
-                <li><button><i class="fa-regular fa-user"></i> Edit Profile</button></li>
                 <li><button onclick="window.location.href='../TA/check_balance.php'"><i class="fa-solid fa-ticket"></i> Balance Check</button></li>
                 <li><button onclick="window.location.href='../AW/deposit.php'"><i class="fa-solid fa-ticket"></i> Deposit </button></li>
                 <li><button onclick="window.location.href='../AW/withdrawl.php'"><i class="fa-solid fa-ticket"></i> Withdrawl</button></li>

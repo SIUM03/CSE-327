@@ -14,26 +14,38 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 
     // === Admin or Employee Login ===
-    if ($role === "Employee") {
-        $sql = "SELECT * FROM Employee WHERE email = '$email' AND password = '$password' ";
-        $result = $conn->query($sql);
+ if ($role === "Employee") {
+    // Use prepared statement to avoid SQL injection
+    $stmt = $conn->prepare("SELECT * FROM Employee WHERE email = ? AND password = ?");
+    $stmt->bind_param("ss", $email, $password);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-        if ($result->num_rows === 1) {
-            $row = $result->fetch_assoc();
-            $_SESSION["username"] = $row["username"];
-            $_SESSION["email"] = $row["email"];
-            echo "<script>alert('Login successful as $role!'); window.location.href = '../MS/index.php';</script>";
-        } else {
-            echo "<script>alert('Invalid $role credentials!');</script>";
-        }
+    if ($result->num_rows === 1) {
+        $row = $result->fetch_assoc();
+        $_SESSION["username"] = $row["username"];
+        $_SESSION["email"] = $row["email"];
+        $_SESSION["role"] = "Employee";
+        echo "<script>alert('Login successful as Employee!'); window.location.href = '../MS/index.php';</script>";
+    } else {
+        echo "<script>alert('Invalid Employee credentials!');</script>";
     }
-    // === Customer Login ===
-    elseif ($role === "Customer") {
-        $sql = "SELECT * FROM Customer WHERE email = '$email' AND password = '$password'";
-        $result = $conn->query($sql);
+}
 
-        if ($result->num_rows === 1) {
-            $row = $result->fetch_assoc();
+    // === Customer Login ===
+ elseif ($role === "Customer") {
+ 
+    $stmt = $conn->prepare("SELECT * FROM Customer WHERE email = ? AND password = ?");
+    $stmt->bind_param("ss", $email, $password);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows === 1) {
+        $row = $result->fetch_assoc();
+        $kycstatus = $row["kycstatus"];
+        $_SESSION["kycstatus"] = $kycstatus;
+
+        if ($kycstatus == 1) {
             $_SESSION["userType"] = "Customer";
             $_SESSION["username"] = $row["name"];
             $_SESSION["userId"] = $row["customerId"];
@@ -42,9 +54,28 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $_SESSION["address"] = $row["address"];
             echo "<script>alert('Login successful as Customer!'); window.location.href = 'Customer_dashboard.php';</script>";
         } else {
-            echo "<script>alert('Invalid Customer credentials!');</script>";
+            echo "<script>alert('Account in review'); window.location.href = 'index.php';</script>";
         }
+    } else {
+        echo "<script>alert('Invalid Customer credentials!');</script>";
     }
+    
+}
+else{
+    // === Admin Login ===
+    $sql = "SELECT * FROM Employee WHERE email = '$email' AND password = '$password'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows === 1) {
+        $row = $result->fetch_assoc();
+        $_SESSION["username"] = $row["username"];
+        $_SESSION["email"] = $row["email"];
+        echo "<script>alert('Login successful as Admin!'); window.location.href = '../AS/Admin.php';</script>";
+    } else {
+        echo "<script>alert('Invalid Admin credentials!');</script>";
+    }
+}
+
 
     $conn->close();
 }
@@ -321,7 +352,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 <i class="fas fa-user-tag"></i>
                 <select name="role" required>
                     <option value="">Select Role</option>
-                    <option value="Admin">Admin</option>
                     <option value="Employee">Employee</option>
                     <option value="Customer">Customer</option>
                 </select>

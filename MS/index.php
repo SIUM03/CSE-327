@@ -23,9 +23,14 @@ if ($result) {
 }
 
 $result = $conn->query("SELECT COUNT(*) AS total FROM Customer WHERE kycstatus = 1");
+$result2 = $conn->query("SELECT COUNT(*) AS total FROM Customer WHERE kycstatus = 0");
 if ($result) {
     $row = $result->fetch_assoc();
     $kycVerified = $row['total'];
+}
+if ($result2) {
+    $row = $result2->fetch_assoc();
+    $kycUnverified = $row['total'];
 }
 
 $result = $conn->query("
@@ -34,10 +39,7 @@ $result = $conn->query("
     LEFT JOIN Account a ON c.customerId = a.customerId AND a.status = 'active'
     WHERE a.accountId IS NULL
 ");
-if ($result) {
-    $row = $result->fetch_assoc();
-    $deactivated = $row['total'];
-}
+
 
 $conn->close();
 ?>
@@ -59,7 +61,7 @@ $conn->close();
           <li><a href="index.php">🏠 Dashboard</a></li>
           <li><a href="../AS/Sign_up.php">➕ Add Customer</a></li>
           <li><a href="customerc.php">🔍 Customer</a></li>
-          <li><a href="#">✏️ Edit Customer Info</a></li>
+          <li><a href="updated_info.php">✏️ Edit Customer Info</a></li>
           <li><a href="transaction-history.php">🕓 Transaction History</a></li>
            <li><a href="transaction.php"> 📝Transaction </a></li>
           <li><a href="../AS/index.php">🏃🏻Sign Out</a></li>
@@ -76,7 +78,7 @@ $conn->close();
       <section class="summary-cards">
         <div class="card">👥 Total Customers<br /><strong><?= htmlspecialchars($totalCustomers) ?></strong></div>
         <div class="card">✅ KYC Verified<br /><strong><?= htmlspecialchars($kycVerified) ?></strong></div>
-        <div class="card">🚫 Deactivated<br /><strong><?= htmlspecialchars($deactivated) ?></strong></div>
+        <div class="card">🚫 Not Varified<br /><strong><?= htmlspecialchars($kycUnverified) ?></strong></div>
       </section>
 
       <section class="actions">
@@ -85,7 +87,6 @@ $conn->close();
           <a href="../AS/Sign_up.php" class="btn">➕ Add New Customer</a>
           <a href="customerc.php" class="btn">🔍 View Customers</a>
           <a href="individual_history.php" class="btn">🔍 View Customers indivual transaction history</a>
-          <a href="#" class="btn">👨‍💼 My Profile</a>
           <a href="transaction-history.php" class="btn">🕓 View Transactions</a>
           <a href="transaction.php" class="btn"> Transactions</a>
         </div>

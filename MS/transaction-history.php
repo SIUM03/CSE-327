@@ -42,16 +42,6 @@ $result = $conn->query($sql);
   <div class="container">
     <h2>Transaction History</h2>
 
-    <!-- Search Form -->
-    <form method="GET" class="filter-form">
-      <input 
-        type="text" 
-        name="search" 
-        placeholder="Search by name or account ID" 
-        value="<?= htmlspecialchars($search) ?>"
-      />
-      <button type="submit">Search</button>
-    </form>
 
     <!-- Transaction Table -->
     <table>
